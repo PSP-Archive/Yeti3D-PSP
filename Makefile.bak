@@ -1,0 +1,88 @@
+# Makefile
+# Yeti 3d SDL
+# 13-11-05
+#
+
+PRG = yeti3dsdl
+OBJ = main.o yeti.o data.o draw.o extra.o font.o game.o maps.o sprites.c model.c
+SRC = main.c yeti.c data.c draw.c extra.c font.c game.c maps.c sprites.o model.o
+
+CC = gcc
+CFLAGS = -Wall $(SDL_CFLAGS)
+LD = 
+LDFLAGS = 
+DEPEND = makedepend $(CFLAGS) $(SDL_CFLAGS)
+
+SDL_CFLAGS := $(shell sdl-config --cflags)
+SDL_LDFLAGS := $(shell sdl-config --libs)
+
+.c.o:
+	$(CC) $(CFLAGS) -c $*.c
+
+all: $(OBJ) compileinfo
+	./compileinfo "$(CFLAGS)"
+	$(CC) $(OBJ) -o $(PRG) $(SDL_LDFLAGS)
+
+compileinfo:
+	$(CC) -Wall -O2 compileinfo.c -o compileinfo
+	@echo
+	@echo You can copy compileinfo into a PATH folder
+	@echo
+
+depend: $(SRC)
+	$(DEPEND) $(SRC)
+	
+install:
+	@echo
+	@echo There is nothing to install ...
+	@echo
+
+clean:
+	rm -f *.o
+	rm -f $(PRG)
+
+
+# DO NOT DELETE THIS LINE --
+
+main.o: /usr/include/stdlib.h /usr/include/features.h
+main.o: /usr/include/sys/cdefs.h /usr/include/gnu/stubs.h
+main.o: /usr/include/sys/types.h /usr/include/bits/types.h
+main.o: /usr/include/bits/wordsize.h /usr/include/bits/typesizes.h
+main.o: /usr/include/time.h /usr/include/endian.h /usr/include/bits/endian.h
+main.o: /usr/include/sys/select.h /usr/include/bits/select.h
+main.o: /usr/include/bits/sigset.h /usr/include/bits/time.h
+main.o: /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h
+main.o: /usr/include/bits/sched.h /usr/include/alloca.h /usr/include/stdio.h
+main.o: /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h
+main.o: /usr/include/bits/wchar.h /usr/include/gconv.h
+main.o: /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h
+main.o: /usr/include/SDL/SDL.h /usr/include/SDL/SDL_main.h
+main.o: /usr/include/SDL/SDL_types.h /usr/include/SDL/SDL_getenv.h
+main.o: /usr/include/SDL/SDL_error.h /usr/include/SDL/begin_code.h
+main.o: /usr/include/SDL/close_code.h /usr/include/SDL/SDL_rwops.h
+main.o: /usr/include/SDL/SDL_timer.h /usr/include/SDL/SDL_audio.h
+main.o: /usr/include/SDL/SDL_byteorder.h /usr/include/SDL/SDL_cdrom.h
+main.o: /usr/include/SDL/SDL_joystick.h /usr/include/SDL/SDL_events.h
+main.o: /usr/include/SDL/SDL_active.h /usr/include/SDL/SDL_keyboard.h
+main.o: /usr/include/SDL/SDL_keysym.h /usr/include/SDL/SDL_mouse.h
+main.o: /usr/include/SDL/SDL_video.h /usr/include/SDL/SDL_mutex.h
+main.o: /usr/include/SDL/SDL_quit.h /usr/include/SDL/SDL_version.h game.h
+main.o: yeti.h viewports.h sprites.h
+yeti.o: yeti.h viewports.h sprites.h
+data.o: data.h yeti.h viewports.h sprites.h
+draw.o: yeti.h viewports.h sprites.h
+extra.o: extra.h yeti.h viewports.h sprites.h /usr/include/stdio.h
+extra.o: /usr/include/features.h /usr/include/sys/cdefs.h
+extra.o: /usr/include/gnu/stubs.h /usr/include/bits/types.h
+extra.o: /usr/include/bits/wordsize.h /usr/include/bits/typesizes.h
+extra.o: /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h
+extra.o: /usr/include/bits/wchar.h /usr/include/gconv.h
+extra.o: /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h
+extra.o: /usr/include/stdlib.h /usr/include/sys/types.h /usr/include/time.h
+extra.o: /usr/include/endian.h /usr/include/bits/endian.h
+extra.o: /usr/include/sys/select.h /usr/include/bits/select.h
+extra.o: /usr/include/bits/sigset.h /usr/include/bits/time.h
+extra.o: /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h
+extra.o: /usr/include/bits/sched.h /usr/include/alloca.h
+game.o: game.h yeti.h viewports.h sprites.h
+maps.o: yeti.h viewports.h sprites.h maps/e1m1.c
